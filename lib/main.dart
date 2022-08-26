@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'models/transaction.dart';
+import 'package:intl/intl.dart';
 
 main() => runApp(const ExpensesApp());
 
@@ -36,7 +37,6 @@ class MyHomePage extends StatelessWidget {
         title: const Text('Personal Expenses'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(
@@ -51,11 +51,38 @@ class MyHomePage extends StatelessWidget {
               return Card(
                 child: Row(
                   children: [
-                    SizedBox(child: Text(tr.value.toString())),
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 10),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.purple.shade50,
+                          width: 2,
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        'R\$ ${tr.value.toStringAsFixed(2)}',
+                        style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.purple),
+                      ),
+                    ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(tr.title),
-                        Text(tr.date.toString()),
+                        Text(
+                          tr.title,
+                          style: const TextStyle(
+                              color: Colors.purple,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ),
+                        Text(
+                          DateFormat('d MM y').format(tr.date),
+                          style: const TextStyle(color: Colors.grey),
+                        ),
                       ],
                     )
                   ],
