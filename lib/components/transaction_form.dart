@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TransationForm extends StatelessWidget {
-  TransationForm({Key? key}) : super(key: key);
-
   final titleController = TextEditingController();
   final valueController = TextEditingController();
+  final void Function(String, double) onSubmit;
+
+  TransationForm(this.onSubmit, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class TransationForm extends StatelessWidget {
               ),
             ),
             TextField(
-              controller: titleController,
+              controller: valueController,
               decoration: const InputDecoration(
                 labelText: 'Value (U\$)',
               ),
@@ -30,7 +31,11 @@ class TransationForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    final title = titleController.text;
+                    final value = double.tryParse(valueController.text) ?? 0.0;
+                    onSubmit(title, value);
+                  },
                   child: const Text(
                     'New transation',
                     style: TextStyle(color: Colors.purple),
