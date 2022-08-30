@@ -12,24 +12,26 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: MediaQuery.of(context).size.height * 0.7,
       child: transactions.isEmpty
-          ? Column(
-              children: [
-                const SizedBox(height: 20),
-                Text(
-                  'No have transations create',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  height: 200,
-                  child: Image.asset(
-                    'assets/imgs/waiting.png',
-                    fit: BoxFit.cover,
+          ? SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+                  Text(
+                    'No have transations create',
+                    style: Theme.of(context).textTheme.headline6,
                   ),
-                )
-              ],
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 200,
+                    child: Image.asset(
+                      'assets/imgs/waiting.png',
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                ],
+              ),
             )
           : ListView.builder(
               itemCount: transactions.length,
@@ -41,11 +43,17 @@ class TransactionList extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
                   child: ListTile(
                     leading: CircleAvatar(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       radius: 30,
                       child: Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: FittedBox(
-                          child: Text('R\$${tr.value}'),
+                          child: Text(
+                            'R\$${tr.value}',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                     ),
