@@ -60,7 +60,7 @@ class ChartBar extends StatelessWidget {
                 child: Text(
                   label,
                   style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold),
                 ),
               ),
